@@ -1,10 +1,9 @@
-// Nombre del archivo: main.c
 #include "autopista.h"
 #include "utilidades.h"
 #include "simulacion.h"
 
 // ====================================================================
-// VARIABLES GLOBALES
+// VARIABLES
 // ====================================================================
 ParametrosSimulacion g_params;
 Estadisticas g_estadisticas;
@@ -28,10 +27,10 @@ void inicializar_sistema() {
 
     // Inicializar semáforos de cada subtramo
     sem_init(&g_subtramos[0].sem_capacidad, 0, 4); // Subtramo 1: 4 vehículos
-    sem_init(&g_subtramos[1].sem_capacidad, 0, 2); // Subtramo 2: 2 "pesos" (2 autos o 1 camión)
+    sem_init(&g_subtramos[1].sem_capacidad, 0, 2); // Subtramo 2: 2 "pesos" (2 autos o 1 camión), se hace la conversión
     sem_init(&g_subtramos[3].sem_capacidad, 0, 3); // Subtramo 4: 3 vehículos
 
-    // Inicialización del subtramo 3 (el más complejo)
+    // Inicialización del subtramo 3
     g_subtramos[2].id = 2;
     sem_init(&g_subtramos[2].mutex, 0, 1);
     sem_init(&g_subtramos[2].puerta_victoria, 0, 0); // Puertas cerradas inicialmente

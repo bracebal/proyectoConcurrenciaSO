@@ -1,7 +1,3 @@
-# Nombre del archivo: Makefile
-# Makefile para el Proyecto de Simulación de Autopista
-# Estructura modular para facilitar la compilación y el mantenimiento.
-
 # --- Variables ---
 CC = gcc
 # CFLAGS: Banderas para el compilador
@@ -52,4 +48,3 @@ clean:
 # .PHONY: Le dice a make que "all" y "clean" no son nombres de archivos reales,
 # sino nombres de recetas que siempre deben ejecutarse cuando se les llama.
 .PHONY: all clean
-

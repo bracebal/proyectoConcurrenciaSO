@@ -1,13 +1,13 @@
 #include "simulacion.h"
 #include "utilidades.h"
 
-// Variables globales definidas en main.c
+// Variables
 extern CentralTelefonica g_central;
 extern Estadisticas g_estadisticas;
 extern volatile bool g_simulacion_activa;
 extern bool g_verbose;
 
-// Función interna para mostrar el estado de un teléfono
+// Función para mostrar el estado de un teléfono
 void mostrar_estado(Telefono* telefono, const char* mensaje_extra) {
     const char* estado_str = estado_a_texto(telefono->estado);
     if (mensaje_extra) {
@@ -114,8 +114,8 @@ void* hilo_central(void* args) {
                     sem_t* sem1 = (origen->id < id_destino) ? &origen->lock : &destino->lock;
                     sem_t* sem2 = (origen->id < id_destino) ? &destino->lock : &origen->lock;
                     
-                    // Ya tenemos el semáforo de 'origen', ahora necesitamos el de 'destino'.
-                    // Liberamos 'origen' temporalmente para adquirir ambos en el orden correcto.
+                    // Ya tenemos el semáforo de origen, ahora necesitamos el de destino
+                    // Liberamos 'origen' temporalmente para adquirir ambos en el orden correcto
                     sem_post(&origen->lock);
                     if (g_verbose) printf("[DEBUG][Central] Semáforo Tel %d liberado temporalmente.\n", origen->id);
 
@@ -148,7 +148,7 @@ void* hilo_central(void* args) {
                     sem_post(sem2);
                     if (g_verbose) printf("[DEBUG][Central] Ambos semáforos liberados.\n");
 
-                    goto siguiente_telefono; // Saltar la liberación del semáforo al final del bucle
+                    goto siguiente_telefono; // Se mueve la liberación al final del bucle
                 }
 
                 case DESCOLGADO_ESPERANDO_MARCAR:
@@ -203,9 +203,9 @@ void* hilo_central(void* args) {
             if (g_verbose) printf("[DEBUG][Central] Libera semáforo Tel %d.\n", origen->id);
             sem_post(&origen->lock);
 
-            siguiente_telefono:; // Etiqueta para el goto
+            siguiente_telefono:; // Etiqueta
         }
-        usleep(100000); // Pequeña pausa para no sobrecargar la CPU
+        usleep(100000); // Evita sobrecargar el CPU
     }
     
     printf("[Central][Hilo %lu]: Central telefónica cerrando operaciones.\n", pthread_self());
@@ -219,7 +219,7 @@ void iniciar_simulacion(ParametrosSimulacion* params) {
 
     g_simulacion_activa = true;
     
-    // Crear hilos
+    // Constructor de hilos
     pthread_t hilo_id_central;
     pthread_t* hilos_telefonos = malloc(sizeof(pthread_t) * params->num_telefonos);
     

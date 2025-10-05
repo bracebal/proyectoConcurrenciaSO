@@ -1,7 +1,6 @@
-// Nombre del archivo: utilidades.c
 #include "utilidades.h"
 
-extern bool g_verbose; // Accede a la bandera global definida en main.c
+extern bool g_verbose; // Accede a la bandera definida en main.c
 
 // --- Implementación de funciones auxiliares ---
 
@@ -16,7 +15,7 @@ double tiempo_actual_preciso() {
 
 void ver_consumo_recursos() {
     printf("\n--- Consumo de Recursos del Proceso ---\n");
-    // Esta implementación es para sistemas Linux/POSIX.
+    // Implementación es para sistemas Linux/POSIX.
     FILE* fp = fopen("/proc/self/status", "r");
     if (fp == NULL) {
         perror("No se pudo abrir /proc/self/status. Función compatible con Linux.");
@@ -32,7 +31,7 @@ void ver_consumo_recursos() {
     printf("----------------------------------------\n\n");
 }
 
-// --- Implementación de funciones del menú ---
+// --- Implementación de funciones para el menú ---
 
 void modificar_parametros(ParametrosSimulacion* p) {
     printf("\n--- Modificar Parámetros de Simulación ---\n");
@@ -55,7 +54,7 @@ void modificar_parametros(ParametrosSimulacion* p) {
 }
 
 void mostrar_menu(ParametrosSimulacion* params) {
-    // Declaración de la función que inicia la simulación (definida en simulacion.c)
+    // Declaración de la función que inicia la simulación (definida previamente en simulacion.c)
     void iniciar_simulacion(ParametrosSimulacion* params);
     
     int opcion;

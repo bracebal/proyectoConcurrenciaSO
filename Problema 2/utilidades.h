@@ -3,7 +3,7 @@
 
 #include "autopista.h"
 
-// --- Prototipos de funciones de utilidades ---
+// --- Prototipos de funciones ---
 
 // Funciones del menú
 void mostrar_menu(ParametrosSimulacion* params);

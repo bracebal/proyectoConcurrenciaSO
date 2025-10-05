@@ -3,13 +3,13 @@
 #include "simulacion.h"
 
 // ====================================================================
-// VARIABLES GLOBALES
+// VARIABLES
 // ====================================================================
 ParametrosSimulacion g_params;
 Estadisticas g_estadisticas;
 CentralTelefonica g_central;
 volatile bool g_simulacion_activa = false;
-bool g_verbose = false; // Bandera para modo detallado/depuración
+bool g_verbose = false; // Bandera
 
 // ====================================================================
 // INICIALIZACIÓN Y LIMPIEZA DEL SISTEMA
@@ -20,7 +20,7 @@ void inicializar_sistema() {
     g_params.num_telefonos = 100;
     g_params.timeout1_sin_marcar = 10;
     g_params.timeout2_sin_respuesta = 15;
-    g_params.duracion_simulacion = 60; // 1 minuto
+    g_params.duracion_simulacion = 60; // 60 segundo = 1 minuto
 
     // Inicializar estadísticas y su semáforo
     memset(&g_estadisticas, 0, sizeof(Estadisticas));

@@ -1,9 +1,9 @@
 #include "utilidades.h"
 
-// Accede a la bandera global definida en main.c
+// Accede a la bandera
 extern bool g_verbose;
 
-// --- Implementación de funciones auxiliares ---
+// --- Implementación de funciones ---
 
 const char* estado_a_texto(EstadoTelefono estado) {
     switch (estado) {
@@ -21,7 +21,7 @@ const char* estado_a_texto(EstadoTelefono estado) {
 
 void ver_consumo_recursos() {
     printf("\n--- Consumo de Recursos del Proceso ---\n");
-    // Esta implementación es para sistemas Linux/POSIX.
+    // Implementación para sistemas Linux/POSIX.
     FILE* fp = fopen("/proc/self/status", "r");
     if (fp == NULL) {
         perror("No se pudo abrir /proc/self/status. Función compatible con Linux.");
@@ -37,7 +37,7 @@ void ver_consumo_recursos() {
     printf("----------------------------------------\n\n");
 }
 
-// --- Implementación de funciones del menú ---
+// --- Implementación de funciones ---
 
 void modificar_parametros(ParametrosSimulacion* p) {
     printf("\n--- Modificar Parámetros de Simulación ---\n");
@@ -64,7 +64,7 @@ void modificar_parametros(ParametrosSimulacion* p) {
 }
 
 void mostrar_menu(ParametrosSimulacion* params) {
-    // Declaración de la función que inicia la simulación (definida en simulacion.c)
+    // Declaración de la función que inicia la simulación (previamente definida en simulacion.c)
     void iniciar_simulacion(ParametrosSimulacion* params);
     
     int opcion;

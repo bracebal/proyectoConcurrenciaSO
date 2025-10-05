@@ -1,14 +1,13 @@
-// Nombre del archivo: simulacion.c
 #include "simulacion.h"
 #include "utilidades.h"
 
-// Variables globales definidas en main.c
+// Variables definidas previamente en main.c
 extern Subtramo g_subtramos[NUM_SUBTRAMOS];
 extern Estadisticas g_estadisticas;
 extern volatile bool g_simulacion_activa;
 extern bool g_verbose;
 
-// --- Lógica de Sincronización para Subtramos ---
+// --- Sincronización para Subtramos ---
 
 void entrar_subtramo_simple(Vehiculo* v, int id_subtramo, int peso) {
     if (g_verbose) printf("[DEBUG][Veh %d] Intentando entrar a subtramo %d (peso %d)\n", v->id, id_subtramo + 1, peso);
@@ -46,7 +45,7 @@ void entrar_subtramo_3(Vehiculo* v) {
 
 void salir_subtramo_3(Vehiculo* v) {
     Subtramo* st = &g_subtramos[2];
-    sem_wait(&st->mutex); // Inicio de sección crítica
+    sem_wait(&st->mutex); // Entra en la sección crítica
     st->vehiculos_dentro--;
 
     if (st->vehiculos_dentro == 0) {
@@ -67,7 +66,7 @@ void salir_subtramo_3(Vehiculo* v) {
              for(int i=0; i < a_pasar; i++) sem_post(&st->puerta_victoria);
         }
     }
-    sem_post(&st->mutex); // Fin de sección crítica
+    sem_post(&st->mutex); // Sale de la sección crítica
 }
 
 
@@ -133,7 +132,7 @@ void* hilo_vehiculo(void* args) {
             case 3: salir_subtramo_simple(v, 3, 1); break;
         }
 
-        if (i < NUM_SUBTRAMOS - 1) usleep((100 + rand() % 200) * 1000); // Simula hombrillo
+        if (i < NUM_SUBTRAMOS - 1) usleep((100 + rand() % 200) * 1000); // "Hombrillo"
     }
 
     printf("[Vehículo %5d (%s, %s)]: === Ha completado su recorrido ===\n", v->id, tipo_a_texto(v->tipo), dir_a_texto(v->direccion));
@@ -157,7 +156,7 @@ void* hilo_reloj(void* args) {
             printf("Subtramo %d: %lld (%s), %lld (%s)\n", i + 1,
                    g_estadisticas.vehiculos_por_subtramo_hora[i][HACIA_VICTORIA], dir_a_texto(HACIA_VICTORIA),
                    g_estadisticas.vehiculos_por_subtramo_hora[i][HACIA_MARACAY], dir_a_texto(HACIA_MARACAY));
-            // Resetear contadores horarios
+            // Reinicia contadores horarios
             g_estadisticas.vehiculos_por_subtramo_hora[i][HACIA_VICTORIA] = 0;
             g_estadisticas.vehiculos_por_subtramo_hora[i][HACIA_MARACAY] = 0;
         }

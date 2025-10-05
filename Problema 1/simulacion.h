@@ -3,7 +3,7 @@
 
 #include "central.h"
 
-// --- Prototipos de funciones de simulación ---
+// --- Prototipos de funciones ---
 
 void iniciar_simulacion(ParametrosSimulacion* params);
 void* hilo_telefono(void* args);
