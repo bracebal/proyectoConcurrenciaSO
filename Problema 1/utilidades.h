@@ -5,7 +5,7 @@
 
 // --- Prototipos de funciones ---
 
-// Funciones del menú
+// Funciones del menu
 void mostrar_menu(ParametrosSimulacion* params);
 void modificar_parametros(ParametrosSimulacion* params);
 

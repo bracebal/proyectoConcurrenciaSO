@@ -7,6 +7,6 @@
 
 void iniciar_simulacion(ParametrosSimulacion* params);
 void* hilo_telefono(void* args);
-void* hilo_central(void* args);
+void* hilo_central(void* args); // <-- Hilo central está de vuelta
 
 #endif // SIMULACION_H
